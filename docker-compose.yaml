@@ -7,13 +7,40 @@ x-metamapper-defaults: &metamapper_defaults
     context: ./
     args:
       - METAMAPPER_VERSION
-  image: 'metamapper-io/metamapper:$METAMAPPER_VERSION'
+  image: metamapper-on-premise
   env_file:
     - .env
   depends_on:
     - postgres
-    - rabbitmq
-
+  volumes:
+    - ./metamapper/contrib:/usr/local/metamapper/metamapper/contrib
+    - ./metamapper/config:/usr/local/metamapper/metamapper/config
+services:
+  postgres:
+    << : *restart_policy
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - 'metamapper-postgres:/var/lib/postgresql/data'
+  rabbitmq:
+    << : *restart_policy
+    image: rabbitmq:3.6
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+  web:
+    << : *metamapper_defaults
+    command: webserver
+    ports:
+      - 5050:5050
+  worker:
+    << : *metamapper_defaults
+    command: worker
+  scheduler:
+    << : *metamapper_defaults
+    command: scheduler
 volumes:
   metamapper-postgres:
     external: true
