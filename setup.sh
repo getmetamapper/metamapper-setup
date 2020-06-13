@@ -18,7 +18,7 @@ $dc down --rmi local --remove-orphans
 echo ""
 echo "Creating Docker volumes..."
 echo "Created $(docker volume create --name=metamapper-postgres)."
-echo "Created $(docker volume create --name=metamapper-rabbitmq)."
+echo "Created $(docker volume create --name=metamapper-msgbroker)."
 
 # Step 3: Copy configurations and generate secret keys, if needed.
 #
@@ -80,7 +80,10 @@ echo ""
 echo "Fetching and updating Docker images..."
 echo ""
 
-docker pull ${METAMAPPER_IMAGE:-metamapper/metamapper}:${METAMAPPER_VERSION:-latest}
+MM_IMAGE=${METAMAPPER_IMAGE:-metamapper/metamapper}
+MM_VERSION=${METAMAPPER_VERSION:-latest}
+
+docker pull $MM_IMAGE:$MM_VERSION
 
 # Step 5: Build the local Docker image using their Metamapper configuration.
 #
@@ -88,7 +91,7 @@ echo ""
 echo "Building and tagging on-premise Docker image..."
 echo ""
 
-$dc build --force-rm web
+$dc build --build-arg METAMAPPER_IMAGE=$MM_IMAGE --force-rm webserver
 
 echo ""
 echo "Docker image has been built."
@@ -98,8 +101,8 @@ echo "Docker image has been built."
 echo ""
 echo "Creating database..."
 
-$dc run -e DB_SETUP=1 web manage initdb --close-sessions --noinput --verbosity 0
-$dc run -e DB_SETUP=1 web migrate
+$dc run -e DB_SETUP=1 webserver manage initdb --close-sessions --noinput --verbosity 0
+$dc run -e DB_SETUP=1 webserver migrate
 
 echo ""
 echo "Database has been created and migrations have been run."
@@ -114,4 +117,6 @@ echo ""
 echo "Setup is complete! Run the following command to spin up Metamapper:"
 echo ""
 echo "  docker-compose up -d"
+echo ""
+echo "Access to the web UI defaults to: http://localhost:5050"
 echo ""
