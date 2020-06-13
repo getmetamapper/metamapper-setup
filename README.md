@@ -10,12 +10,6 @@ To get started, we recommend you fork this repo and run the following command:
 ./setup.sh
 ```
 
-You can specify what version of Metamapper you want to install with the `METAMAPPER_VERSION` variable:
-
-```bash
-METAMAPPER_VERSION=latest ./setup.sh
-```
-
 Once the bootstrap has completed, you should be able to run:
 
 ```bash
@@ -23,6 +17,36 @@ docker-compose up -d
 ```
 
 Then you can access the web UI from whatever port (default: 5050) is specified in your `gunicorn.py` configuration.
+
+## Environment Variables
+
+### METAMAPPER_IMAGE
+
+We publish to two separate Docker Hub repositories during our build process.
+
+#### metamapper/metamapper
+
+Stable builds are released as [point versions](https://semver.org/) to [metamapper/metamapper](https://hub.docker.com/r/metamapper/metamapper). **We recommend this as your starting point when deploying your own Metamapper instance.**
+
+You can specify what image of Metamapper you want to install with the `METAMAPPER_IMAGE` variable.
+
+```bash
+METAMAPPER_IMAGE=metamapper/metamapper METAMAPPER_VERSION=latest ./setup.sh
+```
+
+#### metamapper/preview
+
+We also maintain a development image at [metamapper/preview](https://hub.docker.com/r/metamapper/preview). These builds contain the latest – but potentially unstable – features available. Use this if you want to be on the bleeding edge and help us debug our codebase before an official release.
+
+Preview releases are tagged with the first 7 characters of the last commit hash.
+
+### METAMAPPER_VERSION
+
+You can specify what version of Metamapper you want to install with the `METAMAPPER_VERSION` variable:
+
+```bash
+METAMAPPER_IMAGE=metamapper/preview METAMAPPER_VERSION=35b182c ./setup.sh
+```
 
 ## Configuring Metamapper
 

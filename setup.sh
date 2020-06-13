@@ -80,7 +80,7 @@ echo ""
 echo "Fetching and updating Docker images..."
 echo ""
 
-docker pull metamapper/metamapper:${METAMAPPER_VERSION:-latest}
+docker pull ${METAMAPPER_IMAGE:-metamapper/metamapper}:${METAMAPPER_VERSION:-latest}
 
 # Step 5: Build the local Docker image using their Metamapper configuration.
 #
