@@ -20,13 +20,13 @@ Then you can access the web UI from whatever port (default: 5050) is specified i
 
 ## Environment Variables
 
-### METAMAPPER_IMAGE
+### `METAMAPPER_IMAGE` (default: `metamapper/metamapper`)
 
 We publish to two separate Docker Hub repositories during our build process.
 
-#### metamapper/metamapper
+#### `metamapper/metamapper`
 
-Stable builds are released as [point versions](https://semver.org/) to [metamapper/metamapper](https://hub.docker.com/r/metamapper/metamapper). **We recommend this as your starting point when deploying your own Metamapper instance.**
+Stable builds are published as [point releases](https://semver.org/) to [metamapper/metamapper](https://hub.docker.com/r/metamapper/metamapper). **We recommend this as your starting point when deploying your own Metamapper instance.**
 
 You can specify what image of Metamapper you want to install with the `METAMAPPER_IMAGE` variable.
 
@@ -34,13 +34,13 @@ You can specify what image of Metamapper you want to install with the `METAMAPPE
 METAMAPPER_IMAGE=metamapper/metamapper METAMAPPER_VERSION=latest ./setup.sh
 ```
 
-#### metamapper/preview
+#### `metamapper/preview`
 
 We also maintain a development image at [metamapper/preview](https://hub.docker.com/r/metamapper/preview). These builds contain the latest – but potentially unstable – features available. Use this if you want to be on the bleeding edge and help us debug our codebase before an official release.
 
 Preview releases are tagged with the first 7 characters of the last commit hash.
 
-### METAMAPPER_VERSION
+### `METAMAPPER_VERSION` (default: `latest`)
 
 You can specify what version of Metamapper you want to install with the `METAMAPPER_VERSION` variable:
 
