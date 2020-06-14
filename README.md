@@ -50,9 +50,9 @@ METAMAPPER_IMAGE=metamapper/preview METAMAPPER_VERSION=35b182c ./setup.sh
 
 ## Configuring Metamapper
 
-### The `config` module
+### The `conf` module
 
-We offer some configuration files to some of the libraries that Metamapper uses to function. These files are generated and placed in the [config](metamapper/config) directory as part of [setup.sh](setup.sh) script.
+We offer some configuration files to some of the libraries that Metamapper uses to function. These files are generated and placed in the [conf](metamapper/conf) directory as part of [setup.sh](setup.sh) script.
 
 #### gunicorn.py
 
