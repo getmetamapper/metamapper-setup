@@ -1,0 +1,22 @@
+version: 2.1
+jobs:
+  setup-and-test:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install Metamapper
+          command: ./setup.sh
+      - run:
+          name: Start Metamapper
+          command: docker-compose up -d
+      - run:
+          name: Confirm webserver exists
+          command: |
+            timeout 60 bash -c 'until $(curl -Isf -o /dev/null http://localhost:5050); do printf '.'; sleep 0.5; done'
+workflows:
+  pipeline:
+    jobs:
+      - setup-and-test
