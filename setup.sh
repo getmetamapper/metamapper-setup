@@ -28,7 +28,7 @@ echo ""
 echo "Checking if configuration files exist..."
 echo ""
 
-CELERY_CONFIG_PY='metamapper/config/celery.py'
+CELERY_CONFIG_PY='metamapper/conf/celery.py'
 CELERY_TEMPLATE_PY='config_templates/celery.default.py'
 
 if [ ! -f "$CELERY_CONFIG_PY" ]; then
@@ -38,7 +38,7 @@ else
     echo "File already exists: $CELERY_CONFIG_PY"
 fi
 
-DJANGO_CONFIG_PY='metamapper/config/settings.py'
+DJANGO_CONFIG_PY='metamapper/conf/settings.py'
 DJANGO_TEMPLATE_PY='config_templates/settings.default.py'
 
 if [ ! -f "$DJANGO_CONFIG_PY" ]; then
@@ -48,7 +48,7 @@ else
     echo "File already exists: $DJANGO_CONFIG_PY"
 fi
 
-GUNICORN_CONFIG_PY='metamapper/config/gunicorn.py'
+GUNICORN_CONFIG_PY='metamapper/conf/gunicorn.py'
 GUNICORN_TEMPLATE_PY='config_templates/gunicorn.default.py'
 
 if [ ! -f "$GUNICORN_CONFIG_PY" ]; then
@@ -101,8 +101,8 @@ echo "Docker image has been built."
 echo ""
 echo "Creating database..."
 
-$dc run -e DB_SETUP=1 webserver manage initdb --close-sessions --noinput --verbosity 0
-$dc run -e DB_SETUP=1 webserver migrate
+$dc run -e DB_SETUP=1 --rm webserver manage initdb --close-sessions --noinput --verbosity 0
+$dc run -e DB_SETUP=1 --rm webserver migrate
 
 echo ""
 echo "Database has been created and migrations have been run."

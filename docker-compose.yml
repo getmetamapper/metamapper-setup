@@ -14,7 +14,7 @@ x-metamapper-defaults: &metamapper_defaults
   depends_on:
     - postgres
   volumes:
-    - ./metamapper/config:/usr/local/metamapper/metamapper/config
+    - ./metamapper/conf:/usr/local/metamapper/metamapper/conf
     - ./metamapper/contrib:/usr/local/metamapper/metamapper/contrib
 services:
   postgres:

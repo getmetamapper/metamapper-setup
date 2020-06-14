@@ -2,4 +2,4 @@
 *
 
 # Only allow requirements.txt
-!/requirements.txt
+!/metamapper/**

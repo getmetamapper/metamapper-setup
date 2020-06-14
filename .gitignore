@@ -1,6 +1,6 @@
 # Metamapper imported folders
 
-metamapper/config/*.py
+metamapper/conf/*.py
 metamapper/contrib/*.py
 
 # Byte-compiled / optimized / DLL files

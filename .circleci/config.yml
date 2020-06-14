@@ -1,17 +1,18 @@
 version: 2.1
 jobs:
   setup-and-test:
-    docker:
-      - image: circleci/buildpack-deps:trusty
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
-      - setup_remote_docker
       - run: ./setup.sh
       - run: docker-compose up -d
       - run:
-          name: Confirm webserver exists
+          name: Ping web service
           command: |
-            timeout 60 bash -c 'until $(curl -Isf -o /dev/null http://localhost:5050); do printf '.'; sleep 0.5; done'
+            docker-compose run worker \
+              timeout 60 bash \
+                -c 'until $(curl -Isf -o /dev/null http://webserver:5050/); do printf '.'; sleep 0.5; done'
 workflows:
   pipeline:
     jobs:
