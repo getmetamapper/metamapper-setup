@@ -17,7 +17,7 @@ function require() {
 }
 
 require docker
-require dc
+require docker-compose
 
 # Step 1: Check current system dependencies.
 if [ ! -f .env ]; then cp -f .env.dist .env ; fi
