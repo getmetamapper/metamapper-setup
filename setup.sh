@@ -8,6 +8,17 @@ function secret() {
    dd if=/dev/urandom bs="$1" count=1 2>/dev/null | openssl enc -A -base64
 }
 
+function require() {
+    command -v "$1" > /dev/null 2>&1 || {
+        echo "Some of the required software is not installed:"
+        echo "    please install $1" >&2;
+        exit 4;
+    }
+}
+
+require docker
+require dc
+
 # Step 1: Check current system dependencies.
 if [ ! -f .env ]; then cp -f .env.dist .env ; fi
 

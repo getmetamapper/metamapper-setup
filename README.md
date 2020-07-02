@@ -1,6 +1,6 @@
 # Metamapper Setup
 
-Official bootstrap for spinning up your own Metamapper instance with Docker.
+Official bootstrap for spinning up your own Metamapper instance with Docker and Docker-Compose.
 
 ## Setup
 
