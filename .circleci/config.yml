@@ -13,6 +13,7 @@ jobs:
             docker-compose run worker \
               timeout 60 bash \
                 -c 'until $(curl -Isf -o /dev/null http://webserver:5050/); do printf '.'; sleep 0.5; done'
+      - run: ./healthcheck.sh
 workflows:
   pipeline:
     jobs:
