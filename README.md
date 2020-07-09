@@ -1,5 +1,7 @@
 # Metamapper Setup
 
+[![CircleCI](https://circleci.com/gh/getmetamapper/metamapper-setup.svg?style=shield)](https://circleci.com/gh/getmetamapper/metamapper-setup) [![latest version](https://img.shields.io/docker/v/metamapper/metamapper?sort=semver)](https://hub.docker.com/r/metamapper/metamapper) [![discord](https://img.shields.io/discord/713821768237973535)](http://discuss.metamapper.io)
+
 Official bootstrap for spinning up your own Metamapper instance with Docker and Docker-Compose.
 
 ## Setup
