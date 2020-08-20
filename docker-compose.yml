@@ -35,7 +35,7 @@ services:
       - 5050:5050
   worker:
     << : *metamapper_defaults
-    command: worker
+    command: worker --queue default,revisioner
   scheduler:
     << : *metamapper_defaults
     command: scheduler
