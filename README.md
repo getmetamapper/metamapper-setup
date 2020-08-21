@@ -1,6 +1,6 @@
 # Metamapper Setup
 
-[![CircleCI](https://circleci.com/gh/getmetamapper/metamapper-setup.svg?style=shield)](https://circleci.com/gh/getmetamapper/metamapper-setup) [![latest version](https://img.shields.io/docker/v/metamapper/metamapper?sort=semver)](https://hub.docker.com/r/metamapper/metamapper) [![discord](https://img.shields.io/discord/713821768237973535)](http://discuss.metamapper.io)
+[![CircleCI](https://circleci.com/gh/getmetamapper/metamapper-setup.svg?style=shield)](https://circleci.com/gh/getmetamapper/metamapper-setup) [![latest version](https://img.shields.io/docker/v/getmetamapper/metamapper?sort=semver)](https://hub.docker.com/r/getmetamapper/metamapper) [![discord](https://img.shields.io/discord/713821768237973535)](http://discuss.metamapper.io)
 
 Official bootstrap for spinning up your own Metamapper instance with Docker and Docker-Compose.
 
@@ -22,21 +22,21 @@ Then you can access the web UI from whatever port (default: 5050) is specified i
 
 ## Environment Variables
 
-### `METAMAPPER_IMAGE` (default: `metamapper/metamapper`)
+### `METAMAPPER_IMAGE` (default: `getmetamapper/metamapper`)
 
 We publish to two separate Docker Hub repositories during our build process.
 
-#### `metamapper/metamapper`
+#### `getmetamapper/metamapper`
 
-Stable builds are published as [point releases](https://semver.org/) to [metamapper/metamapper](https://hub.docker.com/r/metamapper/metamapper). **We recommend this as your starting point when deploying your own Metamapper instance.**
+Stable builds are published as [point releases](https://semver.org/) to [getmetamapper/metamapper](https://hub.docker.com/r/getmetamapper/metamapper). **We recommend this as your starting point when deploying your own Metamapper instance.**
 
 You can specify what image of Metamapper you want to install with the `METAMAPPER_IMAGE` variable.
 
 ```bash
-METAMAPPER_IMAGE=metamapper/metamapper METAMAPPER_VERSION=latest ./setup.sh
+METAMAPPER_IMAGE=getmetamapper/metamapper METAMAPPER_VERSION=latest ./setup.sh
 ```
 
-#### `metamapper/preview`
+#### `getmetamapper/preview`
 
 We also maintain a development image at [metamapper/preview](https://hub.docker.com/r/metamapper/preview). These builds contain the latest – but potentially unstable – features available. Use this if you want to be on the bleeding edge and help us debug our codebase before an official release.
 
@@ -47,7 +47,7 @@ Preview releases are tagged with the first 7 characters of the last commit hash.
 You can specify what version of Metamapper you want to install with the `METAMAPPER_VERSION` variable:
 
 ```bash
-METAMAPPER_IMAGE=metamapper/preview METAMAPPER_VERSION=35b182c ./setup.sh
+METAMAPPER_IMAGE=getmetamapper/preview METAMAPPER_VERSION=35b182c ./setup.sh
 ```
 
 ## Configuring Metamapper
@@ -66,7 +66,7 @@ Metamapper uses [celery](https://docs.celeryproject.org/en/stable/index.html) to
 
 #### settings.py
 
-Metamapper is a Django application. Much of the configuration is done in the [django.conf.settings](https://github.com/metamapper-io/metamapper/blob/master/metamapper/settings.py) module.
+Metamapper is a Django application. Much of the configuration is done in the [django.conf.settings](https://github.com/getmetamapper/metamapper/blob/master/metamapper/settings.py) module.
 
 You can override any setting in this file using the `settings.py` file generated during the installation process. However, do this with extreme caution, as it could break your build.
 
@@ -98,5 +98,5 @@ RUN if [ -s /usr/local/metamapper/metamapper/requirements.txt ]; \
 
 ## Resources
 
-- [Issue Tracker](https://github.com/metamapper-io/metamapper-setup/issues)
-- [Code](https://github.com/metamapper-io/metamapper)
+- [Issue Tracker](https://github.com/getmetamapper/metamapper-setup/issues)
+- [Code](https://github.com/getmetamapper/metamapper)

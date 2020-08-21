@@ -91,7 +91,7 @@ echo ""
 echo "Fetching and updating Docker images..."
 echo ""
 
-MM_IMAGE=${METAMAPPER_IMAGE:-metamapper/metamapper}
+MM_IMAGE=${METAMAPPER_IMAGE:-getmetamapper/metamapper}
 MM_VERSION=${METAMAPPER_VERSION:-latest}
 
 docker pull $MM_IMAGE:$MM_VERSION

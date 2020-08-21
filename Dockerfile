@@ -1,6 +1,6 @@
 ARG METAMAPPER_VERSION=latest
 ARG METAMAPPER_IMAGE
-FROM ${METAMAPPER_IMAGE:-metamapper/metamapper:$METAMAPPER_VERSION}
+FROM ${METAMAPPER_IMAGE:-getmetamapper/metamapper:$METAMAPPER_VERSION}
 
 COPY . /usr/local/metamapper
 
