@@ -1,8 +1,8 @@
-# Metamapper Setup
+# Metamapper
 
-[![CircleCI](https://circleci.com/gh/getmetamapper/metamapper-setup.svg?style=shield)](https://circleci.com/gh/getmetamapper/metamapper-setup) [![latest version](https://img.shields.io/docker/v/getmetamapper/metamapper?sort=semver)](https://hub.docker.com/r/getmetamapper/metamapper) [![discord](https://img.shields.io/discord/713821768237973535)](http://discuss.metamapper.io)
+[Metamapper](https://github.com/getmetamapper/metamapper) is an open source data catalog. The Analytics team is currently piloting this software to see how it can assist with data curation and self-service analytics.
 
-Official bootstrap for spinning up your own Metamapper instance with Docker and Docker-Compose.
+This is a private fork of the [official bootstrap](https://github.com/getmetamapper/metamapper-setup) for spinning up your own Metamapper instance with Docker and Docker-Compose.
 
 ## Setup
 
@@ -20,23 +20,31 @@ docker-compose up -d
 
 Then you can access the web UI from whatever port (default: 5050) is specified in your `gunicorn.py` configuration.
 
+### Authentication
+
+Metamapper uses `django.contrib.auth.middleware.AuthenticationMiddleware` to handle user authentication. This can be overriden using the `METAMAPPER_AUTHENTICATION_MIDDLEWARE` environment variable.
+
+This repository overrides the default middleware and instead injects the [AnonymousAuthenticationMiddleware](https://github.com/getmetamapper/metamapper/blob/master/app/authentication/middleware.py#L64) class, which disables user authentication. We've done this so you can try out Metamapper as quickly as possible.
+
+However, we recommend using the default `django.contrib.auth.middleware.AuthenticationMiddleware` class in production.
+
 ## Environment Variables
 
-### `METAMAPPER_IMAGE` (default: `getmetamapper/metamapper`)
+### `METAMAPPER_IMAGE` (default: `metamapper/metamapper`)
 
 We publish to two separate Docker Hub repositories during our build process.
 
-#### `getmetamapper/metamapper`
+#### `metamapper/metamapper`
 
-Stable builds are published as [point releases](https://semver.org/) to [getmetamapper/metamapper](https://hub.docker.com/r/getmetamapper/metamapper). **We recommend this as your starting point when deploying your own Metamapper instance.**
+Stable builds are published as [point releases](https://semver.org/) to [metamapper/metamapper](https://hub.docker.com/r/metamapper/metamapper). **We recommend this as your starting point when deploying your own Metamapper instance.**
 
 You can specify what image of Metamapper you want to install with the `METAMAPPER_IMAGE` variable.
 
 ```bash
-METAMAPPER_IMAGE=getmetamapper/metamapper METAMAPPER_VERSION=latest ./setup.sh
+METAMAPPER_IMAGE=metamapper/metamapper METAMAPPER_VERSION=latest ./setup.sh
 ```
 
-#### `getmetamapper/preview`
+#### `metamapper/preview`
 
 We also maintain a development image at [metamapper/preview](https://hub.docker.com/r/metamapper/preview). These builds contain the latest – but potentially unstable – features available. Use this if you want to be on the bleeding edge and help us debug our codebase before an official release.
 
@@ -47,7 +55,7 @@ Preview releases are tagged with the first 7 characters of the last commit hash.
 You can specify what version of Metamapper you want to install with the `METAMAPPER_VERSION` variable:
 
 ```bash
-METAMAPPER_IMAGE=getmetamapper/preview METAMAPPER_VERSION=35b182c ./setup.sh
+METAMAPPER_IMAGE=metamapper/preview METAMAPPER_VERSION=35b182c ./setup.sh
 ```
 
 ## Configuring Metamapper
@@ -66,7 +74,7 @@ Metamapper uses [celery](https://docs.celeryproject.org/en/stable/index.html) to
 
 #### settings.py
 
-Metamapper is a Django application. Much of the configuration is done in the [django.conf.settings](https://github.com/getmetamapper/metamapper/blob/master/metamapper/settings.py) module.
+Metamapper is a Django application. Much of the configuration is done in the [django.conf.settings](https://github.com/metamapper-io/metamapper/blob/master/metamapper/settings.py) module.
 
 You can override any setting in this file using the `settings.py` file generated during the installation process. However, do this with extreme caution, as it could break your build.
 
@@ -86,7 +94,6 @@ We currently expose the following backends as configurable:
 | `METAMAPPER_FILE_STORAGE_BACKEND` | Handles file uploads to different cloud providers |
 | `METAMAPPER_EMAIL_BACKEND` | Handles email notification deliveries |
 
-
 ### `requirements.txt`
 
 We provide an empty [requirements.txt](metamapper/requirements.txt) that you can update with an dependencies that your `contrib` module needs. It is automatically installed via `pip` at the end of the Docker build process:
@@ -98,5 +105,5 @@ RUN if [ -s /usr/local/metamapper/metamapper/requirements.txt ]; \
 
 ## Resources
 
-- [Issue Tracker](https://github.com/getmetamapper/metamapper-setup/issues)
-- [Code](https://github.com/getmetamapper/metamapper)
+- [Issue Tracker](https://github.com/metamapper-io/metamapper-setup/issues)
+- [Code](https://github.com/metamapper-io/metamapper)
