@@ -74,9 +74,9 @@ You can override any setting in this file using the `settings.py` file generated
 
 Code that is added into this module is added directly into the Metamapper source code on your Docker image. This means that it is accessible by different parts of the application.
 
-For example, Metamapper uses [full text search](https://www.postgresql.org/docs/9.6/textsearch.html) capabilities provided natively in Postgres. This decision was made to reduce the number of components users have to install to get Metamapper up and running – e.g., most people aren't going to need a full-fledge Elasticsearch cluster for their data.
+For example, Metamapper uses [Elasticsearch](https://www.elastic.co/) for quickly searching all of your data assets.
 
-You could, however, roll out your own Elasticsearch (or Solr or whatever) backend, place it in the `contrib` module, and update the reference to that module using the `METAMAPPER_SEARCH_BACKEND` environment variable. Regardless of what happens behind the scenes, it should work as expected as long as the backend exposes the same abstract interface.
+You could, however, roll out your own search backend, place it in the `contrib` module, and update the reference to that module using the `METAMAPPER_SEARCH_BACKEND` environment variable. Regardless of what happens behind the scenes, it should work as expected as long as the backend exposes the same abstract interface.
 
 We currently expose the following backends as configurable:
 
