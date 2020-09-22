@@ -7,7 +7,6 @@
 #
 
 import os
-import sys
 
 
 broker_url = os.getenv('METAMAPPER_CELERY_BROKER_URL')
